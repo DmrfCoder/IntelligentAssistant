@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <com.example.dmrf.intelligentassistant.XCRoundImageView
                 android:id="@+id/to_msg_icon"
                 android:layout_width="49dp"
                 android:layout_height="49dp"

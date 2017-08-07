@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <com.example.dmrf.intelligentassistant.XCRoundImageView
                 android:id="@+id/from_msg_icon"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
@@ -41,17 +41,17 @@
         </LinearLayout>
 
         <TextView
-            android:enabled="true"
-            android:textIsSelectable="true"
-            android:focusable="true"
-            android:longClickable="true"
-            android:autoLink="all"
             android:id="@+id/from_msg_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoLink="all"
             android:background="@mipmap/chatfrom_bg_normal"
+            android:enabled="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="你好" />
+            android:longClickable="true"
+            android:text="你好"
+            android:textIsSelectable="true" />
 
     </LinearLayout>
 
