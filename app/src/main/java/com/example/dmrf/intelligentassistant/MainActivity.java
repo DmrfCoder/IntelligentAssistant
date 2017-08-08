@@ -1,6 +1,7 @@
 package com.example.dmrf.intelligentassistant;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -49,6 +50,11 @@ public class MainActivity extends Activity {
         //连接服务器（初始化）
         Bmob.initialize(this, "0c16c3810a6216cc61493b68e3595eb0");
 
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+
+        User.setUserName(username);
+        
         //初始化View
         initView();
         //初始化数据
