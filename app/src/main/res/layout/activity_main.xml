@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/main_background">
 
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
-        android:background="@mipmap/title_bar">
+        android:background="@mipmap/title_background">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="岗岗"
-            android:textColor="#ffffff"
+            android:textColor="#1296db"
             android:textSize="22sp" />
+
+        <ImageButton
+            android:id="@+id/image_btn_setting"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/setting" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -24,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:background="@mipmap/bottom_bar">
+        android:background="@mipmap/main_background">
 
         <EditText
             android:id="@+id/input_msg"
@@ -34,7 +42,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/send_msg"
-            android:background="@mipmap/login_edit_normal"
+            android:background="@mipmap/title_background"
             android:textSize="18sp" />
 
         <Button
@@ -51,10 +59,11 @@
         android:id="@+id/list_all_msgofus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_top"
         android:layout_above="@+id/layout_bottom"
-        android:transcriptMode="alwaysScroll"
+        android:layout_below="@id/layout_top"
+        android:background="@mipmap/main_background"
         android:divider="@null"
-        android:dividerHeight="5dp" />
+        android:dividerHeight="5dp"
+        android:transcriptMode="alwaysScroll" />
 
 </RelativeLayout>
