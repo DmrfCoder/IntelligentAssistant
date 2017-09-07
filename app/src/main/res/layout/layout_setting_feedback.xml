@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/setting_feedback_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/title_background"
+        android:gravity="center"
+        android:text="意见反馈"
+        android:textColor="@color/blue"
+        android:textSize="30dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativelayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setting_feedback_title"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/title_background">
+
+        <TextView
+            android:id="@+id/setting_feedback_yourname_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="联系电话："
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/setting_feedback_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/setting_feedback_yourname_txt"
+            android:layout_toRightOf="@+id/setting_feedback_yourname_txt"
+            android:gravity="center_vertical"
+            android:hint="选填， 便于我们联系你" />
+
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/setting_feedback_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@mipmap/title_background"
+        android:gravity="top"
+        android:hint="请输入遇到的问题或建议 . . ."
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:scrollbars="vertical" />
+
+    <RelativeLayout
+        android:id="@+id/relativelayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_feedback_content"
+        android:layout_marginTop="30dp"
+        android:background="@mipmap/title_background">
+
+        <Button
+            android:id="@+id/setting_feedbacl_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/view_radius"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/setting_feedback_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/view_radius"
+            android:text="提交" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="提示：\n您也可以发送更详细的反馈信息至开发人员的邮箱：2296452542@qq.com"
+        android:textColor="@color/blue"
+        android:textSize="20dp" />
+</RelativeLayout>

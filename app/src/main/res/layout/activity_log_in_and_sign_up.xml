@@ -8,7 +8,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/no_network_worning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/view_radius_nonetwork_worning"
+            android:gravity="center_horizontal"
+            android:text="您的网络状况不佳，请检查网络！"
+            android:textColor="#1C1C1C"
+            android:textSize="20dp"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,8 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
+            android:autoLink="all"
             android:gravity="center"
-            android:text="岗岗"
+            android:text="小岗"
             android:textColor="#1296db"
             android:textSize="40sp" />
     </LinearLayout>
@@ -81,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/view_radius"
             android:text="注册" />
@@ -92,10 +105,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="80dp"
+            android:layout_marginRight="60dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/view_radius"
             android:text="登录" />
+
+
     </RelativeLayout>
 
 
@@ -104,15 +119,64 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <CheckBox
+            android:id="@+id/checkSaveName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:shadowColor="#1296db"
+            android:text="记住用户名和密码"
+            android:textColor="#1296db" />
+        <!--
+                <Button
+                    android:id="@+id/find_keyword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:background="#00000000"
+                    android:text="忘记密码（待开发）"
+                    android:textColor="#1296db" />-->
 
-        <Button
-            android:id="@+id/find_keyword"
+
+        <CheckBox
+            android:id="@+id/auto_log_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40dp"
             android:background="#00000000"
-            android:text="忘记密码（待开发）"
+            android:shadowColor="#1296db"
+            android:text="自动登录"
             android:textColor="#1296db" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:text="第三方账号登录"
+        android:textColor="#1296db" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <ImageButton
+            android:id="@+id/login_by_QQ"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@mipmap/loginbyqq" />
+
+
+
+    </RelativeLayout>
+
+
 </LinearLayout>

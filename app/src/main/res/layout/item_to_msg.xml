@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -14,41 +14,59 @@
         android:textColor="#f5f5f5"
         android:textSize="12sp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginLeft="25dp"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:layout_toLeftOf="@+id/to_msg_content" />
 
         <TextView
             android:id="@+id/to_msg_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/l2"
+            android:autoLink="all"
             android:background="@mipmap/chatto_bg_normal"
-            android:gravity="center"
-            android:text="你好" />
+            android:enabled="true"
+            android:focusable="true"
+            android:gravity="left"
+            android:longClickable="true"
+            android:text="你好zzZxZXzzxxZczxjHZjhzjhxjhvhxvzvxjhZVxjhVxhvJHVzxhjvHZvxjHVhjxvhzvxhZVhjxvHZVxjhvZjhxvjhZVxhjvJHVxjhzvjhxvjVZjhxvhjz"
+            android:textIsSelectable="true" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/l2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:orientation="vertical">
 
-            <com.example.dmrf.intelligentassistant.XCRoundImageView
+            <com.example.dmrf.intelligentassistant.View.XCRoundImageView
                 android:id="@+id/to_msg_icon"
                 android:layout_width="49dp"
                 android:layout_height="49dp"
+                android:layout_centerHorizontal="true"
                 android:src="@mipmap/wife" />
 
             <TextView
                 android:id="@+id/to_msg_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/to_msg_icon"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:text="regret"
                 android:textSize="18sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

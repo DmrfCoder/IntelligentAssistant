@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     //下面一行为了配置Bomb
@@ -13,6 +15,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,32 +24,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            output.outputFile = new File(file.parent,
+                    "小岗-" + defaultConfig.versionName + "-" + ".apk")
+            //生成的文件名：myapp+版本名+生成日期+.apk
+        }
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
 }
+
 
 dependencies {
     //29~34行为了配置Bomb
-//以下SDK开发者请根据需要自行选择
+    //以下SDK开发者请根据需要自行选择
     //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
     //3.5.5：请务必查看下面注释[1]
-    compile 'cn.bmob.android:bmob-sdk:3.5.5'
-
     //bmob-push：Bmob的推送包
-    compile 'cn.bmob.android:bmob-push:0.8'
-
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
+    compile files('libs/open_sdk_r5793_lite.jar')
+
+    compile 'cn.bmob.android:bmob-sdk:3.5.5'
+    compile 'cn.bmob.android:bmob-push:0.8'
     compile 'cn.bmob.android:http-legacy:1.0'
-
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
-    compile files('libs/gson-2.8.0.jar')
+    compile 'com.android.support:design:26.+'
     testCompile 'junit:junit:4.12'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
+
 
 
 
