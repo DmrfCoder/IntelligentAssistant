@@ -85,6 +85,21 @@
             android:textColorHint="#FFFAFA" />
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_register_bg"
+        android:enabled="false"
+        android:text="登录"
+        android:textColor="@android:color/white" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -93,26 +108,11 @@
             android:id="@+id/regist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/view_radius"
-            android:text="注册" />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/view_radius"
-            android:text="登录" />
-
-
+            android:background="00000000"
+            android:text="新用户注册      "
+            android:textColor="#1296db" />
     </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -173,7 +173,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:background="@mipmap/loginbyqq" />
-
 
 
     </RelativeLayout>

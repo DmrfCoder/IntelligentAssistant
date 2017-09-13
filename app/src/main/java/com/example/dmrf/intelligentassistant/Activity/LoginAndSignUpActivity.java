@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +58,7 @@ public class LoginAndSignUpActivity extends Activity {
     private String opid = null;
     private String nickname = null;
     private boolean flag;
-    
+    ProgressDialog dialog;
 
     private Handler qqHandler = new Handler() {
         @Override
@@ -107,9 +109,14 @@ public class LoginAndSignUpActivity extends Activity {
     }
 
     private void initViews() {
+        dialog = new ProgressDialog(LoginAndSignUpActivity.this);
         no_network_worning = findViewById(R.id.no_network_worning);
         etUserName = (EditText) findViewById(R.id.editUserName);
         etPassword = (EditText) findViewById(R.id.editPassword);
+
+        etUserName.addTextChangedListener(new TextChange());
+        etPassword.addTextChangedListener(new TextChange());
+
         btnSignUp = (Button) findViewById(R.id.regist);
         btnLogIn = findViewById(R.id.login);
         chk = (CheckBox) findViewById(R.id.checkSaveName);
@@ -227,7 +234,7 @@ public class LoginAndSignUpActivity extends Activity {
                     startActivity(intent);
                 } else {
                     e.printStackTrace();
-                    Log.i(MainActivity.TAG, "done: "+e.getMessage());
+                    Log.i(MainActivity.TAG, "done: " + e.getMessage());
                 }
             }
         });
@@ -235,6 +242,10 @@ public class LoginAndSignUpActivity extends Activity {
 
 
     private void LogIn() {
+
+        dialog.setMessage("正在登录...");
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.show();
 
         flag = false;
 
@@ -248,6 +259,7 @@ public class LoginAndSignUpActivity extends Activity {
         final String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            dialog.dismiss();
             Toast.makeText(LoginAndSignUpActivity.this, "用户名和密码不能为空！", Toast.LENGTH_SHORT).show();
         }
 
@@ -284,6 +296,8 @@ public class LoginAndSignUpActivity extends Activity {
                                 Intent intent = new Intent(LoginAndSignUpActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
+                                dialog.dismiss();
+                                Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }
@@ -292,8 +306,10 @@ public class LoginAndSignUpActivity extends Activity {
                 } else {
 
                     if (flag) {
+                        dialog.dismiss();
+                        Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
-                        Log.i(MainActivity.TAG, "done: "+e.getMessage());
+                        Log.i(MainActivity.TAG, "done: " + e.getMessage());
                     } else {
                         flag = true;
                     }
@@ -335,6 +351,8 @@ public class LoginAndSignUpActivity extends Activity {
                                 Intent intent = new Intent(LoginAndSignUpActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
+                                dialog.dismiss();
+                                Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }
@@ -342,8 +360,10 @@ public class LoginAndSignUpActivity extends Activity {
 
                 } else {
                     if (flag) {
+                        dialog.dismiss();
+                        Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
-                        Log.i(MainActivity.TAG, "done: "+e.getMessage());
+                        Log.i(MainActivity.TAG, "done: " + e.getMessage());
                     } else {
                         flag = true;
                     }
@@ -397,7 +417,7 @@ public class LoginAndSignUpActivity extends Activity {
                 } else {
                     if (flag) {
                         e.printStackTrace();
-                        Log.i(MainActivity.TAG, "done: "+e.getMessage());
+                        Log.i(MainActivity.TAG, "done: " + e.getMessage());
                     } else {
                         flag = true;
                     }
@@ -421,7 +441,6 @@ public class LoginAndSignUpActivity extends Activity {
                     }
 
 
-
                     MainActivity.user.setLogin_type("qq");
                     MainActivity.user.setValue("out_name", nickname);
                     MainActivity.user.setValue("login_type", "qq");
@@ -441,7 +460,7 @@ public class LoginAndSignUpActivity extends Activity {
                 } else {
                     if (flag) {
                         e.printStackTrace();
-                        Log.i(MainActivity.TAG, "done: "+e.getMessage());
+                        Log.i(MainActivity.TAG, "done: " + e.getMessage());
                     } else {
                         flag = true;
                     }
@@ -459,5 +478,33 @@ public class LoginAndSignUpActivity extends Activity {
         Tencent.onActivityResultData(requestCode, resultCode, data, LoginByQqUtils.listener);
     }
 
+    // EditText监听器
+    class TextChange implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            boolean Sign2 = etUserName.getText().length() > 0;
+            boolean Sign3 = etPassword.getText().length() > 0;
+            if (Sign2 & Sign3) {
+                btnLogIn.setTextColor(0xFFFFFFFF);
+                btnLogIn.setEnabled(true);
+            }
+            // 在layout文件中，对Button的text属性应预先设置默认值，否则刚打开程序的时候Button是无显示的
+            else {
+                btnLogIn.setTextColor(0xFFD0EFC6);
+                btnLogIn.setEnabled(false);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    }
 
 }
