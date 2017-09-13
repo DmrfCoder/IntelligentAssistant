@@ -40,12 +40,14 @@ public class FeedBackActivity extends Activity {
     }
 
     private void initListener() {
+
         setting_feedbacl_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FeedBackActivity.this.finish();
             }
         });
+
         setting_feedback_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
