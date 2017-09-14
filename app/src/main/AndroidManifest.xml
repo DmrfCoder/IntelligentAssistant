@@ -39,7 +39,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".Activity.LoginAndSignUpActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.SignUpActivity"/>
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.SetIconActivity" />
         <activity android:name=".Activity.SettingActivity" />

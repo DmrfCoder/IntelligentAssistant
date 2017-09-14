@@ -78,7 +78,7 @@ public class FirstPageActivity extends Activity {
         flag = false;
 
         if (NetWorkUtils.getAPNType(FirstPageActivity.this) == 0) {
-            intent.setClass(FirstPageActivity.this, LoginAndSignUpActivity.class);
+            intent.setClass(FirstPageActivity.this, LoginActivity.class);
             startActivity(intent);
             return;
         }
@@ -88,7 +88,7 @@ public class FirstPageActivity extends Activity {
         final String password = key;
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            intent.setClass(FirstPageActivity.this, LoginAndSignUpActivity.class);
+            intent.setClass(FirstPageActivity.this, LoginActivity.class);
             startActivity(intent);
         }
 
@@ -122,7 +122,7 @@ public class FirstPageActivity extends Activity {
                         e.printStackTrace();
                         Log.i(MainActivity.TAG, e.getMessage());
                         Intent intent1 = new Intent();
-                        intent1.setClass(FirstPageActivity.this, LoginAndSignUpActivity.class);
+                        intent1.setClass(FirstPageActivity.this, LoginActivity.class);
                         startActivity(intent1);
                         FirstPageActivity.this.finish();
                     } else {
@@ -162,7 +162,7 @@ public class FirstPageActivity extends Activity {
                         e.printStackTrace();
                         Log.i(MainActivity.TAG,e.getMessage());
                         Intent intent1 = new Intent();
-                        intent1.setClass(FirstPageActivity.this, LoginAndSignUpActivity.class);
+                        intent1.setClass(FirstPageActivity.this, LoginActivity.class);
                         startActivity(intent1);
                         FirstPageActivity.this.finish();
                     } else {

@@ -2,13 +2,10 @@ package com.example.dmrf.intelligentassistant.Utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
-import com.example.dmrf.intelligentassistant.Activity.LoginAndSignUpActivity;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;

@@ -44,7 +44,7 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by DMRF on 2017/8/7.
  */
 
-public class LoginAndSignUpActivity extends Activity {
+public class LoginActivity extends Activity {
     EditText etUserName, etPassword;
     Button btnSignUp, btnLogIn;
     private CheckBox chk;
@@ -71,7 +71,7 @@ public class LoginAndSignUpActivity extends Activity {
             if (icon != null) {
                 GetPrictureFromNetByUrlUtils.LoadingPicture(icon, mHander);
             } else {
-                Toast.makeText(LoginAndSignUpActivity.this, "用户头像信息获取失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "用户头像信息获取失败！", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -86,7 +86,7 @@ public class LoginAndSignUpActivity extends Activity {
                 icon = BitmapAndStringUtils.convertIconToString(bitmap);
                 LogInOrSignUpByUserNameAndPassword();
             } else {
-                Toast.makeText(LoginAndSignUpActivity.this, "从网络获取图片失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "从网络获取图片失败！", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -94,8 +94,8 @@ public class LoginAndSignUpActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in_and_sign_up);
-        ActivityManager.getInstance().addActivity(LoginAndSignUpActivity.this);
+        setContentView(R.layout.activity_log_in);
+        ActivityManager.getInstance().addActivity(LoginActivity.this);
         Bmob.initialize(this, "0c16c3810a6216cc61493b68e3595eb0");
         initViews();
         initListener();
@@ -109,7 +109,7 @@ public class LoginAndSignUpActivity extends Activity {
     }
 
     private void initViews() {
-        dialog = new ProgressDialog(LoginAndSignUpActivity.this);
+        dialog = new ProgressDialog(LoginActivity.this);
         no_network_worning = findViewById(R.id.no_network_worning);
         etUserName = (EditText) findViewById(R.id.editUserName);
         etPassword = (EditText) findViewById(R.id.editPassword);
@@ -168,7 +168,10 @@ public class LoginAndSignUpActivity extends Activity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignUp();
+
+                Intent tempIntent = new Intent();
+                tempIntent.setClass(LoginActivity.this, SignUpActivity.class);
+                LoginActivity.this.startActivity(tempIntent);
             }
         });
 
@@ -185,7 +188,7 @@ public class LoginAndSignUpActivity extends Activity {
         login_by_QQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginByQqUtils.LogInByQQ(LoginAndSignUpActivity.this, qqHandler);
+                LoginByQqUtils.LogInByQQ(LoginActivity.this, qqHandler);
             }
         });
 
@@ -193,7 +196,7 @@ public class LoginAndSignUpActivity extends Activity {
     }
 
     private void SignUp() {
-        if (NetWorkUtils.getAPNType(LoginAndSignUpActivity.this) == 0) {
+        if (NetWorkUtils.getAPNType(LoginActivity.this) == 0) {
             no_network_worning.setVisibility(View.VISIBLE);
             return;
         }
@@ -202,7 +205,7 @@ public class LoginAndSignUpActivity extends Activity {
         final String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            Toast.makeText(LoginAndSignUpActivity.this, "用户名和密码不能为空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "用户名和密码不能为空！", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -226,9 +229,9 @@ public class LoginAndSignUpActivity extends Activity {
                     }
 
 
-                    Toast.makeText(LoginAndSignUpActivity.this, "注册成功!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "注册成功!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setClass(LoginAndSignUpActivity.this, MainActivity.class);
+                    intent.setClass(LoginActivity.this, MainActivity.class);
                     intent.putExtra("username", username);
                     MainActivity.in_type = "signup";
                     startActivity(intent);
@@ -249,7 +252,7 @@ public class LoginAndSignUpActivity extends Activity {
 
         flag = false;
 
-        if (NetWorkUtils.getAPNType(LoginAndSignUpActivity.this) == 0) {
+        if (NetWorkUtils.getAPNType(LoginActivity.this) == 0) {
             no_network_worning.setVisibility(View.VISIBLE);
             return;
         }
@@ -260,7 +263,7 @@ public class LoginAndSignUpActivity extends Activity {
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             dialog.dismiss();
-            Toast.makeText(LoginAndSignUpActivity.this, "用户名和密码不能为空！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "用户名和密码不能为空！", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -292,12 +295,12 @@ public class LoginAndSignUpActivity extends Activity {
                         public void done(List<User> list, BmobException e) {
                             if (e == null) {
                                 MainActivity.user = list.get(0);
-                                Toast.makeText(LoginAndSignUpActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginAndSignUpActivity.this, MainActivity.class);
+                                Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
                                 dialog.dismiss();
-                                Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }
@@ -307,7 +310,7 @@ public class LoginAndSignUpActivity extends Activity {
 
                     if (flag) {
                         dialog.dismiss();
-                        Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.i(MainActivity.TAG, "done: " + e.getMessage());
                     } else {
@@ -347,12 +350,12 @@ public class LoginAndSignUpActivity extends Activity {
                         public void done(List<User> list, BmobException e) {
                             if (e == null) {
                                 MainActivity.user = list.get(0);
-                                Toast.makeText(LoginAndSignUpActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginAndSignUpActivity.this, MainActivity.class);
+                                Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
                                 dialog.dismiss();
-                                Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }
@@ -361,7 +364,7 @@ public class LoginAndSignUpActivity extends Activity {
                 } else {
                     if (flag) {
                         dialog.dismiss();
-                        Toast.makeText(LoginAndSignUpActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "登录失败！", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.i(MainActivity.TAG, "done: " + e.getMessage());
                     } else {
@@ -406,8 +409,8 @@ public class LoginAndSignUpActivity extends Activity {
                         public void done(List<User> list, BmobException e) {
                             if (e == null) {
                                 MainActivity.user = list.get(0);
-                                Toast.makeText(LoginAndSignUpActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginAndSignUpActivity.this, MainActivity.class);
+                                Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
                                 e.printStackTrace();
@@ -451,9 +454,9 @@ public class LoginAndSignUpActivity extends Activity {
                     }
 
 
-                    Toast.makeText(LoginAndSignUpActivity.this, "登录成功!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录成功!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
-                    intent.setClass(LoginAndSignUpActivity.this, MainActivity.class);
+                    intent.setClass(LoginActivity.this, MainActivity.class);
                     MainActivity.in_type = "signup";
 
                     startActivity(intent);
