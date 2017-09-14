@@ -37,10 +37,9 @@ import cn.bmob.v3.listener.UpdateListener;
 public class SetIconActivity extends AppCompatActivity implements View.OnClickListener {
     //用于展示选择的图片
     private ImageView mImageView;
+
+
     private String imageName;
-    private static final int CAMERA_CODE = 1;
-    private static final int GALLERY_CODE = 2;
-    private static final int CROP_CODE = 3;
     private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
