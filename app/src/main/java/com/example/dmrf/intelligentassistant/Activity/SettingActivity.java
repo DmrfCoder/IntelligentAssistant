@@ -184,8 +184,6 @@ public class SettingActivity extends Activity {
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater) SettingActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.activity_log_in, null);
-                CheckBox checkBox = linearLayout.findViewById(R.id.auto_log_in);
-                checkBox.setChecked(false);
                 if (MainActivity.mDates != null) {
                     MainActivity.mDates.clear();
                 }

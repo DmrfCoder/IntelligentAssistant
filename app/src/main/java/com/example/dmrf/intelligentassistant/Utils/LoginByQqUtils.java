@@ -41,7 +41,7 @@ public class LoginByQqUtils {
             msg.arg1 = 2;
 
 
-         qqHandler.sendMessage(msg);
+            qqHandler.sendMessage(msg);
 
 
 

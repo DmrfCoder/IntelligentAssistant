@@ -115,44 +115,7 @@
             android:layout_alignParentTop="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/checkSaveName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:shadowColor="#1296db"
-            android:text="记住用户名和密码"
-            android:textColor="#1296db" />
-        <!--
-                <Button
-                    android:id="@+id/find_keyword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:background="#00000000"
-                    android:text="忘记密码（待开发）"
-                    android:textColor="#1296db" />-->
-
-
-        <CheckBox
-            android:id="@+id/auto_log_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="40dp"
-            android:background="#00000000"
-            android:shadowColor="#1296db"
-            android:text="自动登录"
-            android:textColor="#1296db" />
-    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"

@@ -485,7 +485,7 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
         @Override
         public void run() {
             try {
-                final ChatMessage fromMessage = HttpUtils.sendMessage(tomsg);
+                final ChatMessage fromMessage = HttpUtils.sendMessage(tomsg,MainActivity.this);
                 fromMessage.setName(user.getUsername());
                 fromMessage.setNum(mDates.size());
                 fromMessage.save(new SaveListener<String>() {

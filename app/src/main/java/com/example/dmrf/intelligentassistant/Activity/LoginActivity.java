@@ -47,11 +47,9 @@ import cn.bmob.v3.listener.SaveListener;
 public class LoginActivity extends Activity {
     EditText etUserName, etPassword;
     Button btnSignUp, btnLogIn;
-    private CheckBox chk;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private TextView no_network_worning;
-    private CheckBox auto_log_in;
     private ImageButton login_by_QQ;
     private String SCOPE = "get_simple_userinfo,add_topic";
     private String icon = null;
@@ -59,6 +57,7 @@ public class LoginActivity extends Activity {
     private String nickname = null;
     private boolean flag;
     ProgressDialog dialog;
+    private boolean goin = true;
 
     private Handler qqHandler = new Handler() {
         @Override
@@ -119,19 +118,17 @@ public class LoginActivity extends Activity {
 
         btnSignUp = (Button) findViewById(R.id.regist);
         btnLogIn = findViewById(R.id.login);
-        chk = (CheckBox) findViewById(R.id.checkSaveName);
-        auto_log_in = findViewById(R.id.auto_log_in);
         login_by_QQ = findViewById(R.id.login_by_QQ);
 
         String flag = getIntent().getStringExtra("exit_login");
         if (flag != null) {
             if (flag.equals("true")) {
-                auto_log_in.setChecked(false);
+                goin = false;
             } else {
-                auto_log_in.setChecked(true);
+                goin = true;
             }
         } else {
-            auto_log_in.setChecked(true);
+            goin = true;
         }
 
         pref = getSharedPreferences("UserInfo", MODE_PRIVATE);
@@ -143,23 +140,36 @@ public class LoginActivity extends Activity {
         String key = pref.getString("Password", "");
         String auto = pref.getString("auto", "");
 
-        if (name == null || name.equals("")) {
-            chk.setChecked(false);
-            auto_log_in.setChecked(false);
-        } else {
-            chk.setChecked(true);
-            etUserName.setText(name);
-            if (key.length() > 20) {
-                etPassword.setText(key.substring(0, 20));
+        if (!goin) {
+            if (name == null || name.equals("")) {
+                goin = false;
             } else {
-                etPassword.setText(key);
+                etUserName.setText(name);
+                if (key.length() > 20) {
+                    etPassword.setText(key.substring(0, 20));
+                } else {
+                    etPassword.setText(key);
+                }
             }
+        } else {
+            if (name == null || name.equals("")) {
+                goin = false;
+            } else {
+                goin = true;
+                etUserName.setText(name);
+                if (key.length() > 20) {
+                    etPassword.setText(key.substring(0, 20));
+                } else {
+                    etPassword.setText(key);
+                }
 
-            if (auto_log_in.isChecked()) {
-                LogIn();
+                if (goin) {
+                    LogIn();
+                }
+
             }
-
         }
+
     }
 
     private void initListener() {
@@ -218,15 +228,10 @@ public class LoginActivity extends Activity {
             @Override
             public void done(Object o, BmobException e) {
                 if (e == null) {
-                    if (chk.isChecked()) {
-                        editor.putString("userName", username);
-                        editor.putString("Password", password);
-                        editor.commit();
-                    } else {
-                        editor.remove("userName");
-                        editor.remove("Password");
-                        editor.commit();
-                    }
+
+                    editor.putString("userName", username);
+                    editor.putString("Password", password);
+                    editor.commit();
 
 
                     Toast.makeText(LoginActivity.this, "注册成功!", Toast.LENGTH_SHORT).show();
@@ -275,17 +280,11 @@ public class LoginActivity extends Activity {
             @Override
             public void done(Object o, BmobException e) {
                 if (e == null) {
-                    if (chk.isChecked()) {
-                        editor.putString("userName", username);
-                        editor.putString("Password", password);
 
-                        editor.commit();
+                    editor.putString("userName", username);
+                    editor.putString("Password", password);
 
-                    } else {
-                        editor.remove("userName");
-                        editor.remove("Password");
-                        editor.commit();
-                    }
+                    editor.commit();
 
 
                     BmobQuery<User> query = new BmobQuery<User>();
@@ -330,17 +329,11 @@ public class LoginActivity extends Activity {
             @Override
             public void done(Object o, BmobException e) {
                 if (e == null) {
-                    if (chk.isChecked()) {
-                        editor.putString("userName", username);
-                        editor.putString("Password", password);
 
-                        editor.commit();
+                    editor.putString("userName", username);
+                    editor.putString("Password", password);
 
-                    } else {
-                        editor.remove("userName");
-                        editor.remove("Password");
-                        editor.commit();
-                    }
+                    editor.commit();
 
 
                     BmobQuery<User> query = new BmobQuery<User>();
@@ -390,16 +383,10 @@ public class LoginActivity extends Activity {
             @Override
             public void done(Object o, BmobException e) {
                 if (e == null) {
-                    if (chk.isChecked()) {
-                        editor.putString("userName", nickname);
-                        editor.putString("Password", opid);
-                        editor.commit();
 
-                    } else {
-                        editor.remove("userName");
-                        editor.remove("Password");
-                        editor.commit();
-                    }
+                    editor.putString("userName", nickname);
+                    editor.putString("Password", opid);
+                    editor.commit();
 
 
                     BmobQuery<User> query = new BmobQuery<User>();
@@ -433,15 +420,10 @@ public class LoginActivity extends Activity {
             @Override
             public void done(Object o, BmobException e) {
                 if (e == null) {
-                    if (chk.isChecked()) {
-                        editor.putString("userName", nickname);
-                        editor.putString("Password", opid);
-                        editor.commit();
-                    } else {
-                        editor.remove("userName");
-                        editor.remove("Password");
-                        editor.commit();
-                    }
+
+                    editor.putString("userName", nickname);
+                    editor.putString("Password", opid);
+                    editor.commit();
 
 
                     MainActivity.user.setLogin_type("qq");

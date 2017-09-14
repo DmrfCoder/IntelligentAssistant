@@ -1,11 +1,21 @@
 package com.example.dmrf.intelligentassistant.Utils;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.util.Log;
 
 import com.example.dmrf.intelligentassistant.Activity.MainActivity;
 import com.example.dmrf.intelligentassistant.Bean.ChatMessage;
 import com.example.dmrf.intelligentassistant.Bean.Result;
 import com.example.dmrf.intelligentassistant.Bean.StandardList;
+import com.example.dmrf.intelligentassistant.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -27,6 +37,10 @@ public class HttpUtils {
     private static final String mURL = "http://www.tuling123.com/openapi/api";
     private static final String APIKEY = "97c9c70eef104882906b0cbebfccbd94";
     static String result;
+    private static Context context;
+    private static BitmapDrawable drawable;
+    ;
+
 
     /**
      * 发送一个消息，得到回复的消息
@@ -35,7 +49,7 @@ public class HttpUtils {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public static ChatMessage sendMessage(String msg) throws IOException {
+    public static ChatMessage sendMessage(String msg, Context context) throws IOException {
         ChatMessage chatMessage = new ChatMessage();
         String json = doPOSt(msg);
         Gson gson = new Gson();
@@ -43,50 +57,72 @@ public class HttpUtils {
         if (json == null) {
             chatMessage.setMsg("您的客户端出现了严重问题，请联系管理员！");
         } else {
-            String str = "";
+
+            SpannableStringBuilder spannableString = new SpannableStringBuilder();
+
 
             try {
                 result = gson.fromJson(json, Result.class);
 
 
                 if (result.getText() != null) {
-                    str += result.getText()+"\n";
+                    spannableString.append(result.getText() + "\n");
+
                 }
 
                 if (result.getList() != null) {
                     for (StandardList l : result.getList()) {
                         if (l.getArticle() != null) {
-                            str += "\n" + "标题：" + l.getArticle() + "\n";
+                            spannableString.append("\n" + "标题：" + l.getArticle() + "\n");
                         }
                         if (l.getName() != null) {
-                            str += "\n" + "片名：" + l.getName() + "\n";
+                            spannableString.append("\n" + "片名：" + l.getName() + "\n");
+
                         }
 
                         if (l.getInfo() != null) {
-                            str += "\n" + "主题：" + l.getInfo() + "\n";
+                            spannableString.append("\n" + "主题：" + l.getInfo() + "\n");
                         }
 
                         if (l.getIcon() != null) {
-                            str += "\n" + "主图：" + l.getIcon() + "\n";
+                            spannableString.append("\n" + "主图：" + l.getIcon() + "\n");
+
+                            Handler handler = new Handler() {
+                                @Override
+                                public void handleMessage(Message msg) {
+                                    super.handleMessage(msg);
+                                    Bitmap bitmap;
+                                    bitmap = (Bitmap) msg.obj;
+
+                                    if (bitmap != null) {
+                                        drawable = new BitmapDrawable(bitmap);
+                                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+
+                                    }
+
+                                }
+                            };
+                            ImageSpan imageSpan = new ImageSpan(drawable);
+                            spannableString.setSpan(imageSpan, spannableString.length(), spannableString.length() + 15, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
                         }
                         if (l.getSource() != null) {
-                            str += "\n" + "信息来源：" + l.getSource() + "\n";
+                            spannableString.append("\n" + "信息来源：" + l.getSource() + "\n");
                         }
                         if (l.getDetailurl() != null) {
-                            str += "\n" + "详情：" + l.getDetailurl() + "\n";
+                            spannableString.append("\n" + "详情：" + l.getDetailurl() + "\n");
                         }
                     }
                 }
 
 
                 if (result.getUrl() != null) {
-                    str += "\n详情：" + result.getUrl();
+                    spannableString.append("\n详情：" + result.getUrl());
                 }
 
-                if (str != null) {
-                    chatMessage.setMsg(str);
+                if (spannableString != null) {
+                    chatMessage.setMsg(spannableString);
                 }
-
 
 
             } catch (JsonSyntaxException e) {

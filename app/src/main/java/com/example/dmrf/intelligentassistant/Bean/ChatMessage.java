@@ -1,5 +1,8 @@
 package com.example.dmrf.intelligentassistant.Bean;
 
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+
 import java.util.Date;
 
 import cn.bmob.v3.BmobObject;
@@ -11,10 +14,17 @@ import cn.bmob.v3.BmobObject;
 public class ChatMessage extends BmobObject {
     private String name;
     private boolean isNew;
-    private String msg;
+    private SpannableStringBuilder msg;
     private Type type;
     private Date date;
     private Integer num;
+
+    public ChatMessage(String s,  Type type, Date date) {
+        this.msg=new SpannableStringBuilder();
+        this.msg.append(s);
+        this.type = type;
+        this.date = date;
+    }
 
     public boolean getisNew() {
         return isNew;
@@ -24,7 +34,7 @@ public class ChatMessage extends BmobObject {
         isNew = aNew;
     }
 
-    public ChatMessage(String msg, Type type, Date date) {
+    public ChatMessage(SpannableStringBuilder msg, Type type, Date date) {
         this.msg = msg;
         this.type = type;
         this.date = date;
@@ -43,11 +53,11 @@ public class ChatMessage extends BmobObject {
         this.name = name;
     }
 
-    public String getMsg() {
+    public SpannableStringBuilder getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMsg(SpannableStringBuilder msg) {
         this.msg = msg;
     }
 
@@ -83,6 +93,13 @@ public class ChatMessage extends BmobObject {
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+
+    public void setMsg(String s) {
+        if (msg==null){
+            msg=new SpannableStringBuilder();
+        }
+       msg.append(s);
     }
 
     public enum Type {
