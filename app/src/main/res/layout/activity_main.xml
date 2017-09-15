@@ -43,7 +43,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/voice" />
+            android:background="@drawable/ic_speaks" />
 
         <Button
             android:id="@+id/btn_sad"
