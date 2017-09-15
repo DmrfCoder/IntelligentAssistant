@@ -30,7 +30,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@mipmap/log_in_icon" />
+            android:background="@drawable/ic_icon_second" />
 
         <TextView
             android:layout_width="wrap_content"
