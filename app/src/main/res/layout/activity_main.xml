@@ -68,7 +68,7 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/send_msg"
             android:layout_toRightOf="@+id/change_input_type"
-            android:background="@mipmap/title_background"
+            android:background="@drawable/yuanjiao_message"
             android:imeOptions="actionSend"
             android:textSize="18sp" />
 
