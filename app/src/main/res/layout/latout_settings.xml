@@ -13,14 +13,13 @@
         android:orientation="horizontal">
 
 
-
         <TextView
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="设置"
-            android:textColor="#1296db"
+            android:textColor="#45C01A"
             android:textSize="30dp" />
     </RelativeLayout>
 
@@ -31,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativelayout1"
         android:layout_marginTop="25dp"
-        android:background="@mipmap/title_background"
+        android:background="@drawable/yuanjiao_message"
         android:gravity="left|center_vertical"
         android:text="   聊天头像"
         android:textSize="20dp" />
@@ -42,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/setting_icon"
         android:layout_marginTop="10dp"
-        android:background="@mipmap/title_background"
+        android:background="@drawable/yuanjiao_message"
         android:gravity="left|center_vertical"
         android:text="   人物昵称"
         android:textSize="20dp" />
@@ -54,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/setting_person_name"
         android:layout_marginTop="10dp"
-        android:background="@mipmap/title_background"
+        android:background="@drawable/yuanjiao_message"
         android:gravity="left|center_vertical"
         android:text="   聊天背景"
         android:textSize="20dp" />
@@ -88,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/setting_background"
         android:layout_marginTop="10dp"
-        android:background="@mipmap/title_background"
+        android:background="@drawable/yuanjiao_message"
         android:gravity="left|center_vertical"
         android:text="   删除聊天记录"
         android:textSize="20dp" />
@@ -99,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/setting_clear_record"
         android:layout_marginTop="10dp"
-        android:background="@mipmap/title_background"
+        android:background="@drawable/yuanjiao_message"
         android:gravity="left|center_vertical"
         android:text="   功能介绍"
         android:textSize="20dp" />
@@ -108,15 +107,14 @@
         android:id="@+id/setting_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/title_background"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/setting_function_introduce"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/yuanjiao_message"
         android:gravity="left|center_vertical"
         android:text="   问题反馈"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:layout_below="@+id/setting_function_introduce"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:textSize="20dp" />
 
 
     <Button

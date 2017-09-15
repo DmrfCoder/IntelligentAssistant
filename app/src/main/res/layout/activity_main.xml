@@ -17,16 +17,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="岗岗"
-            android:textColor="#1296db"
+            android:text="小岗"
+            android:textColor="#45C01A"
             android:textSize="22sp" />
 
         <ImageButton
             android:id="@+id/image_btn_setting"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/setting" />
+            android:background="@drawable/ic_setting" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -73,12 +74,14 @@
             android:textSize="18sp" />
 
         <Button
+            android:enabled="false"
             android:id="@+id/send_msg"
             android:layout_width="60dp"
             android:layout_height="40dp"
+            android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/send_btn_background"
+            android:background="@drawable/send_message_background"
             android:text="发送" />
     </RelativeLayout>
 

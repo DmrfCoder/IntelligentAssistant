@@ -15,7 +15,9 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -144,23 +146,21 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
             }
         }
 
-        if (update!=null){
-            if (update.equals("notdo")){
+        if (update != null) {
+            if (update.equals("notdo")) {
                 mDates.clear();
                 mDates.add(new ChatMessage("你好，可爱的小岗为您服务（害羞）", ChatMessage.Type.INCOMING, new Date()));
                 mAdapter = new ChatMessageAdapter(MainActivity.this, mDates);
                 list_msg.setAdapter(mAdapter);
                 list_msg.setSelection(list_msg.getBottom());
-            }else {
+            } else {
                 //初始化数据
                 initDatas();
             }
-        }else {
+        } else {
             //初始化数据
             initDatas();
         }
-
-
 
 
         //初始化事件
@@ -353,7 +353,7 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
                     btn_sad.setVisibility(View.GONE);
                     flag = false;
                 } else {
-                    change_input_type.setBackgroundResource(R.mipmap.keyboard);
+                    change_input_type.setBackgroundResource(R.mipmap.keybord);
                     input_msg.setVisibility(View.GONE);
                     btn_sad.setVisibility(View.VISIBLE);
                     flag = true;
@@ -377,7 +377,7 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
 
         BmobQuery<ChatMessage> query = new BmobQuery<ChatMessage>();
         query.addWhereEqualTo("name", user.getUsername());
-      //  query.setLimit(10000000);
+        //  query.setLimit(10000000);
         query.order("num");
         query.findObjects(new FindListener<ChatMessage>() {
             @Override
@@ -423,6 +423,8 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
     private void initView() {
         list_msg = findViewById(R.id.list_all_msgofus);
         input_msg = findViewById(R.id.input_msg);
+        input_msg.addTextChangedListener(new TextChange());
+
         send_msg = findViewById(R.id.send_msg);
         Setting = findViewById(R.id.image_btn_setting);
         main_title = findViewById(R.id.main_title);
@@ -485,7 +487,7 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
         @Override
         public void run() {
             try {
-                final ChatMessage fromMessage = HttpUtils.sendMessage(tomsg,MainActivity.this);
+                final ChatMessage fromMessage = HttpUtils.sendMessage(tomsg, MainActivity.this);
                 fromMessage.setName(user.getUsername());
                 fromMessage.setNum(mDates.size());
                 fromMessage.save(new SaveListener<String>() {
@@ -612,6 +614,29 @@ public class MainActivity extends Activity implements OnRequestPermissionsResult
                 break;
             default:
                 break;
+        }
+    }
+
+    // EditText监听器
+    class TextChange implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            boolean Sign2 = input_msg.getText().length() > 0;
+            if (Sign2) {
+                send_msg.setTextColor(0xFFFFFFFF);
+                send_msg.setEnabled(true);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
         }
     }
 
